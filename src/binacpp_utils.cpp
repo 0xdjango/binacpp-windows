@@ -74,22 +74,19 @@ string b2a_hex( char *byte_arr, int n ) {
 
 
 //---------------------------------
-time_t get_current_epoch( ) {
-
-    struct timeval tv;
-    gettimeofday(&tv, NULL); 
-
-    return tv.tv_sec ;
+int64_t get_current_epoch( ) {
+	const auto now = std::chrono::system_clock::now();
+	const auto epoch = now.time_since_epoch();
+	const auto seconds = std::chrono::duration_cast<std::chrono::seconds>(epoch);
+	return seconds.count();
 }
 
 //---------------------------------
-unsigned long get_current_ms_epoch( ) {
-
-    struct timeval tv;
-    gettimeofday(&tv, NULL); 
-
-    return tv.tv_sec * 1000 + tv.tv_usec / 1000 ;
-
+uint64_t get_current_ms_epoch( ) {
+	const auto now = std::chrono::system_clock::now();
+	const auto epoch = now.time_since_epoch();
+	const auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(epoch);
+	return milliseconds.count();
 }
 
 //---------------------------

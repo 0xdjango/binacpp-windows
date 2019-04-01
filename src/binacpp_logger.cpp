@@ -1,8 +1,8 @@
 
 #include "binacpp_logger.h"
 
-int    BinaCPP_logger::debug_level   = 1;
-string BinaCPP_logger::debug_log_file = "/tmp/binawatch.log";
+int    BinaCPP_logger::debug_level    = 1;
+string BinaCPP_logger::debug_log_file = string(getenv("TEMP")) + "\\binawatch.log";
 int    BinaCPP_logger::debug_log_file_enable = 0;
 FILE  *BinaCPP_logger::log_fp = NULL;
 
@@ -22,14 +22,15 @@ BinaCPP_logger::write_log( const char *fmt, ... )
     va_list arg;
     
     char new_fmt[1024];
-    
-    struct timeval tv;
-    gettimeofday(&tv, NULL); 
-    time_t t = tv.tv_sec;
-    struct tm * now = localtime( &t );
 
+	const auto epoch = std::chrono::system_clock::now().time_since_epoch();
+	const auto microseconds_m = static_cast<unsigned long>(std::chrono::duration_cast<std::chrono::microseconds>(epoch).count() % 1000000ull);
 
-    sprintf( new_fmt , "%04d-%02d-%02d %02d:%02d:%02d %06ld :%s\n" , now->tm_year + 1900, now->tm_mon + 1, now->tm_mday, now->tm_hour, now->tm_min, now->tm_sec , tv.tv_usec , fmt );
+    const time_t t = std::chrono::duration_cast<std::chrono::seconds>(epoch).count();
+	struct tm now;
+	localtime_s(&now, &t);
+
+    sprintf( new_fmt , "%04d-%02d-%02d %02d:%02d:%02d %06lu :%s\n" , now.tm_year + 1900, now.tm_mon + 1, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec , microseconds_m, fmt );
 
     va_start (arg, fmt);
     
@@ -81,7 +82,7 @@ BinaCPP_logger::open_logfp_if_not_opened() {
 
     if ( debug_log_file_enable && log_fp == NULL ) {
 
-        log_fp = fopen( debug_log_file.c_str() , "a" );
+        fopen_s(&log_fp, debug_log_file.c_str() , "a" );
 
         if ( log_fp ) {
             printf("log file in %s\n", debug_log_file.c_str());

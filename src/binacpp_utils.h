@@ -3,12 +3,11 @@
 #ifndef BINACPP_UTILS
 #define BINACPP_UTILS
 
-#include <unistd.h>
 #include <string>
 #include <sstream>
 #include <vector>
 #include <string.h>
-#include <sys/time.h>
+#include <chrono>
 #include <openssl/hmac.h>
 #include <openssl/sha.h>
 #include <iostream>
@@ -20,14 +19,14 @@ int replace_string_once( string& str, const char *from, const char *to , int off
 
 
 string b2a_hex( char *byte_arr, int n );
-time_t get_current_epoch();
-unsigned long get_current_ms_epoch();
+int64_t get_current_epoch();
+uint64_t get_current_ms_epoch();
 
 
 //--------------------
-inline bool file_exists (const std::string& name) {
- 	 return ( access( name.c_str(), F_OK ) != -1 );
-}
+//inline bool file_exists (const std::string& name) {
+// 	 return ( access( name.c_str(), F_OK ) != -1 );
+//}
 
 string hmac_sha256( const char *key, const char *data);
 string sha256( const char *data );
