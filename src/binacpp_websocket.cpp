@@ -39,10 +39,7 @@ BinaCPP_websocket::event_cb( struct lws *wsi, enum lws_callback_reasons reason, 
 
 				//BinaCPP_logger::write_log("%p %s",  wsi, (char *)in );
 
-				string str_result = string( (char*)in );
-				Json::Reader reader;
-				Json::Value json_result;	
-				reader.parse( str_result , json_result );
+				nlohmann::json json_result = nlohmann::json::parse(string((char*)in));
 
 				if ( handles.find( wsi ) != handles.end() ) {
 					handles[wsi]( json_result );

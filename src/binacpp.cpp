@@ -48,7 +48,7 @@ BinaCPP::cleanup()
 //GET /api/v1/time
 //------------
 void 
-BinaCPP::get_serverTime( Json::Value &json_result) 
+BinaCPP::get_serverTime( nlohmann::json &json_result) 
 {
 	BinaCPP_logger::write_log( "<BinaCPP::get_serverTime>" ) ;
 
@@ -61,9 +61,8 @@ BinaCPP::get_serverTime( Json::Value &json_result)
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
 			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result = nlohmann::json::parse(str_result);
 	    		
 		} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_serverTime> Error ! %s", e.what() ); 
@@ -83,7 +82,7 @@ BinaCPP::get_serverTime( Json::Value &json_result)
 	GET /api/v3/ticker/price
 */
 void 
-BinaCPP::get_allPrices( Json::Value &json_result ) 
+BinaCPP::get_allPrices( nlohmann::json &json_result ) 
 {	
 
 	BinaCPP_logger::write_log( "<BinaCPP::get_allPrices>" ) ;
@@ -97,9 +96,8 @@ BinaCPP::get_allPrices( Json::Value &json_result )
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 		} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_allPrices> Error ! %s", e.what() ); 
@@ -129,10 +127,8 @@ BinaCPP::get_price( const char *symbol )
 
 	if ( !str_result.empty() ) {
 		try {
-			Json::Reader reader;
-			Json::Value json_result;	
-			reader.parse( str_result , json_result );
-	    	ret = atof ( json_result["price"].asString().c_str() );
+			nlohmann::json json_result = nlohmann::json::parse(str_result);
+	    	ret = atof ( json_result["price"].get<string>().c_str() );
 		} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_price> Error ! %s", e.what() ); 
 		}   
@@ -155,7 +151,7 @@ BinaCPP::get_price( const char *symbol )
 	
 */
 void 
-BinaCPP::get_allBookTickers(  Json::Value &json_result ) 
+BinaCPP::get_allBookTickers(  nlohmann::json &json_result ) 
 {	
 
 	BinaCPP_logger::write_log( "<BinaCPP::get_allBookTickers>" ) ;
@@ -169,9 +165,8 @@ BinaCPP::get_allBookTickers(  Json::Value &json_result )
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-	    		reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_allBookTickers> Error ! %s", e.what() ); 
@@ -187,7 +182,7 @@ BinaCPP::get_allBookTickers(  Json::Value &json_result )
 
 //--------------
 void 
-BinaCPP::get_bookTicker( const char *symbol, Json::Value &json_result ) 
+BinaCPP::get_bookTicker( const char *symbol, nlohmann::json &json_result ) 
 {
 	BinaCPP_logger::write_log( "<BinaCPP::get_BookTicker>" ) ;
 
@@ -202,9 +197,8 @@ BinaCPP::get_bookTicker( const char *symbol, Json::Value &json_result )
 	if ( !str_result.empty() ) {
 
 		try {
-			Json::Reader reader;
 			json_result.clear();
-			reader.parse(str_result, json_result);
+			json_result = nlohmann::json::parse(str_result);
 
 		}
 		catch (exception & e) {
@@ -235,7 +229,7 @@ void
 BinaCPP::get_depth( 
 	const char *symbol, 
 	int limit, 
-	Json::Value &json_result ) 
+	nlohmann::json &json_result ) 
 {	
 
 	BinaCPP_logger::write_log( "<BinaCPP::get_depth>" ) ;
@@ -257,9 +251,8 @@ BinaCPP::get_depth(
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-	    		reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 		} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_depth> Error ! %s", e.what() ); 
@@ -297,7 +290,7 @@ BinaCPP::get_aggTrades(
 	time_t startTime, 
 	time_t endTime, 
 	int limit, 
-	Json::Value &json_result 
+	nlohmann::json &json_result 
 ) 
 {	
 
@@ -335,9 +328,8 @@ BinaCPP::get_aggTrades(
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-	    		reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 		} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_aggTrades> Error ! %s", e.what() ); 
@@ -364,7 +356,7 @@ Name	Type	Mandatory	Description
 symbol	STRING	YES	
 */
 void 
-BinaCPP::get_24hr( const char *symbol, Json::Value &json_result ) 
+BinaCPP::get_24hr( const char *symbol, nlohmann::json &json_result ) 
 {	
 
 	BinaCPP_logger::write_log( "<BinaCPP::get_24hr>" ) ;
@@ -386,9 +378,8 @@ BinaCPP::get_24hr( const char *symbol, Json::Value &json_result )
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-	    		reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 		} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_24hr> Error ! %s", e.what() ); 
@@ -425,7 +416,7 @@ BinaCPP::get_klines(
 	int limit, 
 	time_t startTime, 
 	time_t endTime,  
-	Json::Value &json_result ) 
+	nlohmann::json &json_result ) 
 {		
 
 	BinaCPP_logger::write_log( "<BinaCPP::get_klines>" ) ;
@@ -462,9 +453,8 @@ BinaCPP::get_klines(
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-	    		json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 		} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_klines> Error ! %s", e.what() ); 
@@ -500,7 +490,7 @@ recvWindow	LONG	NO
 timestamp	LONG	YES
 */
 void 
-BinaCPP::get_account( long recvWindow,  Json::Value &json_result ) 
+BinaCPP::get_account( long recvWindow,  nlohmann::json &json_result ) 
 {	
 
 	BinaCPP_logger::write_log( "<BinaCPP::get_account>" ) ;
@@ -545,9 +535,8 @@ BinaCPP::get_account( long recvWindow,  Json::Value &json_result )
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_account> Error ! %s", e.what() ); 
@@ -587,7 +576,7 @@ BinaCPP::get_myTrades(
 	int limit,
 	long fromId,
 	long recvWindow, 
-	Json::Value &json_result ) 
+	nlohmann::json &json_result ) 
 {	
 
 	BinaCPP_logger::write_log( "<BinaCPP::get_myTrades>" ) ;
@@ -644,9 +633,8 @@ BinaCPP::get_myTrades(
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_myTrades> Error ! %s", e.what() ); 
@@ -685,7 +673,7 @@ void
 BinaCPP::get_openOrders( 
 	const char *symbol, 
 	long recvWindow,  
-	Json::Value &json_result 
+	nlohmann::json &json_result 
 ) 
 {	
 
@@ -736,9 +724,8 @@ BinaCPP::get_openOrders(
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_openOrders> Error ! %s", e.what() ); 
@@ -787,7 +774,7 @@ BinaCPP::get_allOrders(
 	long orderId,
 	int limit,
 	long recvWindow,
-	Json::Value &json_result 
+	nlohmann::json &json_result 
 ) 
 
 {	
@@ -848,9 +835,8 @@ BinaCPP::get_allOrders(
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_allOrders> Error ! %s", e.what() ); 
@@ -897,7 +883,7 @@ BinaCPP::send_order(
 	double stopPrice,
 	double icebergQty,
 	long recvWindow,
-	Json::Value &json_result ) 
+	nlohmann::json &json_result ) 
 {	
 
 	BinaCPP_logger::write_log( "<BinaCPP::send_order>" ) ;
@@ -974,9 +960,8 @@ BinaCPP::send_order(
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::send_order> Error ! %s", e.what() ); 
@@ -1010,7 +995,7 @@ BinaCPP::get_order(
 	long orderId,
 	const char *origClientOrderId,
 	long recvWindow,
-	Json::Value &json_result ) 
+	nlohmann::json &json_result ) 
 {	
 
 	BinaCPP_logger::write_log( "<BinaCPP::get_order>" ) ;
@@ -1067,9 +1052,8 @@ BinaCPP::get_order(
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_order> Error ! %s", e.what() ); 
@@ -1112,7 +1096,7 @@ BinaCPP::cancel_order(
 	const char *origClientOrderId,
 	const char *newClientOrderId,
 	long recvWindow,
-	Json::Value &json_result ) 
+	nlohmann::json &json_result ) 
 {	
 
 	BinaCPP_logger::write_log( "<BinaCPP::send_order>" ) ;
@@ -1173,9 +1157,8 @@ BinaCPP::cancel_order(
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::send_order> Error ! %s", e.what() ); 
@@ -1197,7 +1180,7 @@ BinaCPP::cancel_order(
 //--------------------
 //Start user data stream (API-KEY)
 void 
-BinaCPP::start_userDataStream( Json::Value &json_result ) 
+BinaCPP::start_userDataStream( nlohmann::json &json_result ) 
 {	
 	BinaCPP_logger::write_log( "<BinaCPP::start_userDataStream>" ) ;
 
@@ -1228,9 +1211,8 @@ BinaCPP::start_userDataStream( Json::Value &json_result )
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::start_userDataStream> Error ! %s", e.what() ); 
@@ -1372,7 +1354,7 @@ BinaCPP::withdraw(
 	double amount, 
 	const char *name,
 	long recvWindow,
-	Json::Value &json_result ) 
+	nlohmann::json &json_result ) 
 {	
 
 	BinaCPP_logger::write_log( "<BinaCPP::withdraw>" ) ;
@@ -1432,9 +1414,8 @@ BinaCPP::withdraw(
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::withdraw> Error ! %s", e.what() ); 
@@ -1472,7 +1453,7 @@ BinaCPP::get_depositHistory(
 	long startTime,
 	long endTime, 
 	long recvWindow,
-	Json::Value &json_result ) 
+	nlohmann::json &json_result ) 
 {	
 
 
@@ -1538,9 +1519,8 @@ BinaCPP::get_depositHistory(
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_depostHistory> Error ! %s", e.what() ); 
@@ -1586,7 +1566,7 @@ BinaCPP::get_withdrawHistory(
 	long startTime,
 	long endTime, 
 	long recvWindow,
-	Json::Value &json_result ) 
+	nlohmann::json &json_result ) 
 {	
 
 
@@ -1652,9 +1632,8 @@ BinaCPP::get_withdrawHistory(
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_withdrawHistory> Error ! %s", e.what() ); 
@@ -1690,7 +1669,7 @@ void
 BinaCPP::get_depositAddress( 
 	const char *asset,
 	long recvWindow,
-	Json::Value &json_result ) 
+	nlohmann::json &json_result ) 
 {	
 
 
@@ -1737,9 +1716,8 @@ BinaCPP::get_depositAddress(
 	if ( !str_result.empty() ) {
 		
 		try {
-			Json::Reader reader;
-			json_result.clear();	
-			reader.parse( str_result , json_result );
+			json_result.clear();
+			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
 		 	BinaCPP_logger::write_log( "<BinaCPP::get_depositAddress> Error ! %s", e.what() ); 

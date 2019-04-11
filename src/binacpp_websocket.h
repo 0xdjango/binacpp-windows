@@ -12,7 +12,7 @@
 #include <vector>
 #include <exception>
 
-#include <json/json.h>
+#include <nlohmann/json.hpp>
 #include <libwebsockets.h>
 
 
@@ -22,7 +22,7 @@
 
 using namespace std;
 
-typedef int (*CB)(Json::Value &json_value );
+typedef int (*CB)(nlohmann::json &json_value );
 
 
 class BinaCPP_websocket {
