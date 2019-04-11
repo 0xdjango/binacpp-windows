@@ -23,14 +23,15 @@ BinaCPP_logger::write_log( const char *fmt, ... )
     
     char new_fmt[1024];
 
-	const auto epoch = std::chrono::system_clock::now().time_since_epoch();
+	const auto now = std::chrono::system_clock::now();
+	const auto epoch = now.time_since_epoch();
 	const auto microseconds_m = static_cast<unsigned long>(std::chrono::duration_cast<std::chrono::microseconds>(epoch).count() % 1000000ull);
 
-    const time_t t = std::chrono::duration_cast<std::chrono::seconds>(epoch).count();
-	struct tm now;
-	localtime_s(&now, &t);
+    const time_t t = std::chrono::system_clock::to_time_t(now);
+	std::tm now_tm;
+	localtime_s(&now_tm, &t);
 
-    sprintf( new_fmt , "%04d-%02d-%02d %02d:%02d:%02d %06lu :%s\n" , now.tm_year + 1900, now.tm_mon + 1, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec , microseconds_m, fmt );
+    sprintf( new_fmt , "%04d-%02d-%02d %02d:%02d:%02d %06lu :%s\n" , now_tm.tm_year + 1900, now_tm.tm_mon + 1, now_tm.tm_mday, now_tm.tm_hour, now_tm.tm_min, now_tm.tm_sec , microseconds_m, fmt );
 
     va_start (arg, fmt);
     
