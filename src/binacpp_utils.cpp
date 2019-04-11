@@ -1,6 +1,8 @@
 
 #include "binacpp_utils.h"
 
+using namespace std;
+
 //--------------------------------
 void split_string( string &s, char delim, vector <string> &result) {
 

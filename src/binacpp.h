@@ -31,12 +31,10 @@
 #define BINANCE_HOST "https://api.binance.com"
 
 
-using namespace std;
-
 class BinaCPP {
 
-	static string api_key;
-	static string secret_key;
+	static std::string api_key;
+	static std::string secret_key;
 	static CURL* curl;
 
 	
@@ -45,11 +43,11 @@ class BinaCPP {
 
 		
 
-		static void curl_api( string &url, string &result_json );
-		static void curl_api_with_header( string &url, string &result_json , vector <string> &extra_http_header, string &post_data, string &action );
-		static size_t curl_cb( void *content, size_t size, size_t nmemb, string *buffer ) ;
+		static void curl_api(std::string &url, std::string &result_json );
+		static void curl_api_with_header(std::string &url, std::string &result_json , std::vector <std::string> &extra_http_header, std::string &post_data, std::string &action );
+		static size_t curl_cb( void *content, size_t size, size_t nmemb, std::string *buffer ) ;
 		
-		static void init( string &api_key, string &secret_key);
+		static void init(std::string &api_key, std::string &secret_key);
 		static void cleanup();
 
 

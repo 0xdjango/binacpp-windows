@@ -1,6 +1,8 @@
 
 #include "binacpp_logger.h"
 
+using namespace std;
+
 int    BinaCPP_logger::debug_level    = 1;
 string BinaCPP_logger::debug_log_file = string(getenv("TEMP")) + "\\binawatch.log";
 int    BinaCPP_logger::debug_log_file_enable = 0;

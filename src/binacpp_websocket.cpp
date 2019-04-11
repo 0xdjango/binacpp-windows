@@ -3,6 +3,7 @@
 #include "binacpp_websocket.h"
 #include "binacpp_logger.h"
 
+using namespace std;
 
 
 struct lws_context *BinaCPP_websocket::context = NULL;

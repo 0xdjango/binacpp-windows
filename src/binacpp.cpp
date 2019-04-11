@@ -15,7 +15,7 @@
 #include "binacpp_logger.h"
 #include "binacpp_utils.h"
 
-
+using namespace std;
 
 
 string BinaCPP::api_key = "";

@@ -20,8 +20,6 @@
 #define BINANCE_WS_PORT 9443
 
 
-using namespace std;
-
 typedef int (*CB)(nlohmann::json &json_value );
 
 
@@ -31,7 +29,7 @@ class BinaCPP_websocket {
 	static struct lws_context *context;
 	static struct lws_protocols protocols[]; 
 
-	static map <struct lws *,CB> handles ;
+	static std::map <struct lws *,CB> handles ;
 	
 	public:
 		static int  event_cb( struct lws *wsi, enum lws_callback_reasons reason, void *user, void *in, size_t len );
