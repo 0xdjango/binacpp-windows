@@ -3,6 +3,7 @@
 #ifndef BINACPP_UTILS
 #define BINACPP_UTILS
 
+#include <io.h>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -23,9 +24,9 @@ uint64_t get_current_ms_epoch();
 
 
 //--------------------
-//inline bool file_exists (const std::string& name) {
-// 	 return ( access( name.c_str(), F_OK ) != -1 );
-//}
+inline bool file_exists (const std::string& name) {
+	return ( _access_s( name.c_str(), 0x00 ) == 0 );
+}
 
 std::string hmac_sha256( const char *key, const char *data);
 std::string sha256( const char *data );
