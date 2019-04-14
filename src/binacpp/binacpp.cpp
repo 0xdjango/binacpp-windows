@@ -61,7 +61,7 @@ BinaCPP::get_serverTime( nlohmann::json &json_result)
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();	
+
 			json_result = nlohmann::json::parse(str_result);
 	    		
 		} catch ( exception &e ) {
@@ -96,7 +96,7 @@ BinaCPP::get_allPrices( nlohmann::json &json_result )
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+
 			json_result = nlohmann::json::parse(str_result);
 	    		
 		} catch ( exception &e ) {
@@ -165,7 +165,7 @@ BinaCPP::get_allBookTickers(  nlohmann::json &json_result )
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+
 			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
@@ -197,7 +197,7 @@ BinaCPP::get_bookTicker( const char *symbol, nlohmann::json &json_result )
 	if ( !str_result.empty() ) {
 
 		try {
-			json_result.clear();
+
 			json_result = nlohmann::json::parse(str_result);
 
 		}
@@ -251,7 +251,7 @@ BinaCPP::get_depth(
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+
 			json_result = nlohmann::json::parse(str_result);
 	    		
 		} catch ( exception &e ) {
@@ -328,7 +328,7 @@ BinaCPP::get_aggTrades(
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 		} catch ( exception &e ) {
@@ -378,7 +378,7 @@ BinaCPP::get_24hr( const char *symbol, nlohmann::json &json_result )
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 		} catch ( exception &e ) {
@@ -453,7 +453,7 @@ BinaCPP::get_klines(
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 		} catch ( exception &e ) {
@@ -535,7 +535,7 @@ BinaCPP::get_account( long recvWindow,  nlohmann::json &json_result )
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
@@ -633,7 +633,7 @@ BinaCPP::get_myTrades(
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
@@ -724,7 +724,7 @@ BinaCPP::get_openOrders(
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
@@ -835,7 +835,7 @@ BinaCPP::get_allOrders(
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
@@ -960,7 +960,7 @@ BinaCPP::send_order(
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
@@ -1052,7 +1052,7 @@ BinaCPP::get_order(
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
@@ -1157,7 +1157,7 @@ BinaCPP::cancel_order(
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
@@ -1211,7 +1211,7 @@ BinaCPP::start_userDataStream( nlohmann::json &json_result )
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
@@ -1414,7 +1414,7 @@ BinaCPP::withdraw(
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
@@ -1519,7 +1519,7 @@ BinaCPP::get_depositHistory(
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
@@ -1632,7 +1632,7 @@ BinaCPP::get_withdrawHistory(
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
@@ -1716,7 +1716,7 @@ BinaCPP::get_depositAddress(
 	if ( !str_result.empty() ) {
 		
 		try {
-			json_result.clear();
+			
 			json_result = nlohmann::json::parse(str_result);
 	    		
 	    	} catch ( exception &e ) {
