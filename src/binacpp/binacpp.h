@@ -1,3 +1,4 @@
+#pragma once
 
 /*
 	Author: tensaix2j
@@ -5,10 +6,6 @@
 	
 	C++ library for Binance API.
 */
-
-
-#ifndef BINACPP_H
-#define BINACPP_H
 
 
 #include <string.h>
@@ -163,6 +160,3 @@ class BinaCPP {
 
 
 };
-
-
-#endif

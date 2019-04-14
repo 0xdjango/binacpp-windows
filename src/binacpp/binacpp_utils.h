@@ -1,7 +1,4 @@
-
-
-#ifndef BINACPP_UTILS
-#define BINACPP_UTILS
+#pragma once
 
 #include <io.h>
 #include <string>
@@ -32,5 +29,3 @@ std::string hmac_sha256( const char *key, const char *data);
 std::string sha256( const char *data );
 void string_toupper(std::string &src);
 std::string string_toupper( const char *cstr );
-
-#endif
