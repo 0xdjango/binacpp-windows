@@ -75,7 +75,7 @@ BinaCPP_websocket::event_cb( struct lws *wsi, enum lws_callback_reasons reason, 
 
 //-------------------
 void 
-BinaCPP_websocket::init(const char* ca_filepath = nullptr)
+BinaCPP_websocket::init(const char* ca_filepath)
 {
 	struct lws_context_creation_info info;
 	memset( &info, 0, sizeof(info) );
