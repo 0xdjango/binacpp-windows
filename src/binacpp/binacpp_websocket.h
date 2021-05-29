@@ -36,7 +36,7 @@ class BinaCPP_websocket {
 			CB user_cb,
 			const char* path
 		);
-		static void init();
+		static void init(const char* ca_filepath = nullptr);
 		static void enter_event_loop();
 
 
